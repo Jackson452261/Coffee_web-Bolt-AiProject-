@@ -530,10 +530,10 @@ function HomePage() {
                 </div>
               </div>
             </div>
-
+    
             <div className="bg-gray-800 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold mb-6">Get In Touch</h3>
-              <form 
+              <h3 className="text-2xl font-bold mb-6">聯絡我們</h3>
+                {/*   <form 
                 ref={contactFormRef}
                 className="space-y-6"
                 onSubmit={handleContactSubmit}
@@ -584,7 +584,8 @@ function HomePage() {
                 {contactResult && (
                   <div className={`text-center text-sm mt-2 ${contactResult.success ? 'text-green-500' : 'text-red-500'}`}>{contactResult.message}</div>
                 )}
-              </form>
+              </form> 
+               */}
             </div>
           </div>
         </div>
