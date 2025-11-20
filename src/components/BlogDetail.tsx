@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowLeft, Calendar, User, Clock, Share2, Heart, MessageCircle } from 'lucide-react';
+import Navbar from './Navbar';
 
 interface BlogDetailProps {
   postId: number;
@@ -8,163 +9,162 @@ interface BlogDetailProps {
 
 const blogContent: { [key: number]: any } = {
   1: {
-    title: "The Art of Pour-Over Coffee: A Complete Guide",
+    title: "手沖咖啡的 指南",
     author: "Sarah Johnson",
     date: "March 15, 2024",
     readTime: "5 min read",
     category: "Brewing",
     image: "https://images.pexels.com/photos/4226796/pexels-photo-4226796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     content: `
-      <p>Pour-over coffee has become the gold standard for coffee enthusiasts who want to experience the full flavor potential of their beans. This brewing method gives you complete control over every variable, from water temperature to extraction time.</p>
+      <p>手沖咖啡已成為咖啡愛好者體驗咖啡豆全部風味的黃金標準。這種沖泡方法讓您可以完全掌控每個變量，從水溫到萃取時間。</p>
       
-      <h3>What You'll Need</h3>
+      <h3>所需物品:</h3>
       <ul>
-        <li>Pour-over dripper (V60, Chemex, or Kalita Wave)</li>
-        <li>Paper filters</li>
-        <li>Gooseneck kettle</li>
-        <li>Digital scale</li>
-        <li>Timer</li>
-        <li>Freshly ground coffee beans</li>
+        <li>手沖濾杯 (V60, Chemex, or Kalita Wave)</li>
+        <li>濾紙</li>
+        <li>細嘴壺  </li>
+        <li>電子秤</li>
+        <li>計時器</li>
+        <li>新鮮研磨的咖啡豆</li>
       </ul>
       
-      <h3>The Perfect Pour-Over Technique</h3>
-      <p>Start by heating your water to 195-205°F (90-96°C). While the water heats, place a filter in your dripper and rinse it with hot water. This removes any papery taste and preheats your brewing vessel.</p>
+      <h3>手沖步驟</h3>
+      <p> 先將水加熱至 90-96°C (195-205°F)。在水加熱的同時，將濾紙放入濾杯中，並用熱水沖洗。</p>
       
-      <p>Grind your coffee to a medium-fine consistency, similar to table salt. Use a ratio of 1:15 to 1:17 (coffee to water). For example, 25g of coffee to 375g of water.</p>
+      <p> 將咖啡粉研磨至中等偏細的程度，類似食鹽的粗細。使用 1:15 至 1:17 的咖啡粉與水的比例。例如，25 克咖啡粉配 375 克水</p>
       
-      <h3>The Brewing Process</h3>
-      <p>Place your dripper on the scale, add the ground coffee, and create a small well in the center. Start your timer and begin with the bloom phase - pour twice the weight of water as coffee (50g water for 25g coffee) in a circular motion, starting from the center and spiraling outward.</p>
+      <h3>沖泡過程</h3>
+      <p>將滴濾器放在電子秤上，加入咖啡粉，並在中心挖一個小凹槽。開始計時，先進行悶蒸階段－以畫圈的方式，從中心向外螺旋式地倒入兩倍於咖啡粉重量的水（例如，25 克咖啡粉配 50 克水）。</p>
       
-      <p>Wait 30-45 seconds for the coffee to bloom, then continue pouring in slow, steady circles, keeping the water level consistent. Complete your pour by 2:30-3:00 minutes.</p>
+      <p>等待 30-45 秒，讓咖啡粉充分悶蒸，然後繼續以緩慢、穩定的畫圈方式註水，保持水位穩定。.</p>
       
-      <h3>Pro Tips for Perfect Pour-Over</h3>
-      <p>Consistency is key. Practice your pouring technique and keep detailed notes about grind size, water temperature, and timing. Small adjustments can make a significant difference in your final cup.</p>
-      
-      <p>Remember, the best pour-over coffee starts with quality beans. Choose freshly roasted, single-origin beans to truly appreciate the nuances this brewing method can reveal.</p>
+       
     `
   },
-  2: {
-    title: "From Bean to Cup: Our Coffee Journey",
-    author: "Michael Chen",
-    date: "March 10, 2024",
-    readTime: "7 min read",
-    category: "Origin",
-    image: "https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    content: `
-      <p>Every cup of coffee tells a story that begins thousands of miles away in the highlands of coffee-growing regions around the world. At Artisan Brew, we believe in transparency and sustainability throughout our entire supply chain.</p>
-      
-      <h3>Our Sourcing Philosophy</h3>
-      <p>We work directly with coffee farmers and cooperatives, building long-term relationships that benefit both the growers and our customers. This direct trade approach ensures fair compensation for farmers while giving us access to the highest quality beans.</p>
-      
-      <p>Our sourcing team travels to origin countries multiple times per year, visiting farms, cupping coffees, and working with farmers to improve processing methods and quality standards.</p>
-      
-      <h3>The Growing Process</h3>
-      <p>Coffee grows best in the "coffee belt" - the area between 25°N and 30°S latitude. Our partner farms are located at high altitudes where cooler temperatures slow the maturation process, allowing beans to develop complex flavors.</p>
-      
-      <p>The journey from seed to harvest takes 3-5 years. Coffee plants produce white, jasmine-scented flowers that develop into cherries containing the coffee beans we know and love.</p>
-      
-      <h3>Processing and Quality Control</h3>
-      <p>After harvest, coffee cherries undergo processing to remove the fruit and reveal the green coffee beans inside. We work with farms that use both washed and natural processing methods, each contributing unique flavor characteristics.</p>
-      
-      <p>Our quality control process begins at origin with rigorous cupping sessions. Only coffees that score 84+ points on the Specialty Coffee Association scale make it into our selection.</p>
-      
-      <h3>Roasting Excellence</h3>
-      <p>Once the green beans arrive at our roastery, our master roasters develop custom roast profiles for each coffee. We use small-batch roasting techniques that highlight each coffee's unique characteristics while ensuring consistency across every bag.</p>
-      
-      <p>From farm to cup, this journey represents our commitment to quality, sustainability, and the incredible people who make exceptional coffee possible.</p>
-    `
-  },
+  2:{
+  title: "從咖啡豆到咖啡杯：我們的職人工藝之旅",
+  author: "Michael Chen",
+  date: "2024 年 3 月 10 日",
+  readTime: "閱讀時間約 7 分鐘",
+  category: "咖啡產地",
+  image: "https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  content: `
+    <p>每一杯咖啡，都承載著來自遙遠高地的故事。從咖啡樹生長的山坡，到你手中那杯溫潤香氣，我們在 Artisan Brew 堅信：透明、永續與尊重，是打造優質咖啡的核心。</p>
+    
+    <h3>我們的採豆理念</h3>
+    <p>我們與全球咖啡農與合作社建立直接貿易關係，維持長期合作，使農民能獲得合理報酬，同時也讓我們取得品質卓越的咖啡豆。</p>
+    
+    <p>團隊每年多次前往原產地拜訪農園、進行杯測，並與農民一同研究更佳的處理方式與品質改善方法，確保每一批咖啡都精益求精。</p>
+    
+    <h3>咖啡的生長旅程</h3>
+    <p>咖啡最適合生長於「咖啡帶」——北緯 25° 至南緯 30° 之間。我們合作的農園多位於高海拔地區，涼爽的氣候讓果實成熟得更慢，使豆子能形成更深層、更多層次的風味。</p>
+    
+    <p>從種植到採收，咖啡樹需 3 到 5 年的時間。咖啡樹先綻放茉莉香氣的白色花朵，再結成鮮紅的果實——也就是包覆著我們熟悉咖啡豆的咖啡櫻桃。</p>
+    
+    <h3>處理法與品質控管</h3>
+    <p>採收後，咖啡櫻桃需經過處理，去除果肉以露出綠色生豆。我們與採用水洗與日曬處理法的農園合作，各自賦予咖啡獨特的風味特色。</p>
+    
+    <p>品質控管從產地便開始：透過嚴格的杯測流程，我們僅挑選在 SCA（精品咖啡協會）評分中達 84 分以上的咖啡進入選項。</p>
+    
+    <h3>烘焙的精準藝術</h3>
+    <p>當生豆抵達烘焙室後，我們的烘豆師會為每一隻豆子量身打造專屬的烘焙曲線。採用小批量烘焙，不僅能凸顯各款咖啡獨有的風味，也確保你每次品嚐到的品質都同樣出色。</p>
+    
+    <p>從農園到你的咖啡杯，這段旅程代表了我們對品質、永續與人文價值的承諾，也是所有熱愛咖啡的人共同的故事。</p>
+  `
+},
   3: {
-    title: "5 Health Benefits of Drinking Quality Coffee",
-    author: "Dr. Emily Rodriguez",
-    date: "March 5, 2024",
-    readTime: "4 min read",
-    category: "Health",
-    image: "https://images.pexels.com/photos/1251175/pexels-photo-1251175.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    content: `
-      <p>Coffee has been enjoyed for centuries, and modern research continues to reveal the numerous health benefits of this beloved beverage. When consumed in moderation, high-quality coffee can be a valuable addition to a healthy lifestyle.</p>
-      
-      <h3>1. Rich in Antioxidants</h3>
-      <p>Coffee is one of the largest sources of antioxidants in the Western diet. These powerful compounds help protect your cells from damage caused by free radicals, potentially reducing the risk of chronic diseases and supporting overall health.</p>
-      
-      <h3>2. Enhanced Cognitive Function</h3>
-      <p>The caffeine in coffee blocks adenosine, a neurotransmitter that makes you feel tired. This leads to improved focus, alertness, and cognitive performance. Studies show that moderate coffee consumption may also help protect against neurodegenerative diseases.</p>
-      
-      <h3>3. Improved Physical Performance</h3>
-      <p>Caffeine stimulates the nervous system and increases adrenaline levels, preparing your body for physical exertion. It also helps break down body fat, making fatty acids available as fuel for your muscles.</p>
-      
-      <h3>4. Liver Protection</h3>
-      <p>Regular coffee consumption has been linked to a reduced risk of liver diseases, including cirrhosis and liver cancer. The protective compounds in coffee help maintain healthy liver function and may slow the progression of liver disease.</p>
-      
-      <h3>5. Heart Health Benefits</h3>
-      <p>Contrary to old beliefs, moderate coffee consumption may actually support heart health. Studies suggest that drinking 3-4 cups per day may reduce the risk of heart disease and stroke, thanks to coffee's anti-inflammatory properties.</p>
-      
-      <h3>Quality Matters</h3>
-      <p>To maximize these health benefits, choose high-quality, freshly roasted coffee beans. Avoid adding excessive sugar or artificial creamers, which can negate coffee's positive effects. Remember, moderation is key - aim for 3-4 cups per day maximum.</p>
-    `
-  },
+  title: "優質咖啡的 5 大健康益處",
+  author: "Dr. Emily Rodriguez",
+  date: "2024 年 3 月 5 日",
+  readTime: "閱讀時間約 4 分鐘",
+  category: "健康",
+  image: "https://images.pexels.com/photos/1251175/pexels-photo-1251175.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  content: `
+    <p>咖啡已流傳數百年，而現代研究更揭示出它所帶來的多種健康益處。在適量攝取的前提下，高品質咖啡不僅能提升日常表現，也能成為健康生活方式的一部分。</p>
+    
+    <h3>1. 富含抗氧化物</h3>
+    <p>咖啡是西方飲食中最重要的抗氧化來源之一。這些抗氧化成分能協助保護細胞，減少自由基造成的損害，進而降低慢性疾病風險並維持整體健康。</p>
+    
+    <h3>2. 增強認知功能</h3>
+    <p>咖啡中的咖啡因會阻斷腺苷（一種讓人感到疲倦的神經傳導物質），從而提升專注力、警覺性與認知表現。研究也指出，適量飲用咖啡可能有助減緩神經退化性疾病的發生風險。</p>
+    
+    <h3>3. 改善運動表現</h3>
+    <p>咖啡因能刺激中樞神經系統、提升腎上腺素水平，讓身體為運動做好準備。同時，它也會促進脂肪分解，使脂肪酸能作為肌肉的能量來源，提高運動效率。</p>
+    
+    <h3>4. 保護肝臟健康</h3>
+    <p>研究發現，經常飲用咖啡與降低多種肝臟疾病的風險相關，包括肝硬化與肝癌。咖啡中的保護性化合物有助維持良好的肝功能，並可能減緩肝病的惡化。</p>
+    
+    <h3>5. 有助心血管健康</h3>
+    <p>與過去的觀念不同，適量飲用咖啡或許對心臟反而有益。研究顯示，每日飲用 3–4 杯咖啡可能降低心臟病與中風風險，這與咖啡的抗發炎特性有關。</p>
+    
+    <h3>為何選擇優質咖啡很重要</h3>
+    <p>想要真正享受咖啡的健康功效，務必選用高品質、且新鮮烘焙的咖啡豆。同時避免過量添加糖與人工奶精，以免抵銷咖啡本身的益處。記得一切適量為原則——每日 3–4 杯即可。</p>
+  `
+},
   4: {
-    title: "Latte Art Masterclass: Creating Beautiful Designs",
-    author: "James Wilson",
-    date: "February 28, 2024",
-    readTime: "6 min read",
-    category: "Technique",
-    image: "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    content: `
-      <p>Latte art transforms a simple coffee drink into a work of art. This skill combines technical precision with creative expression, turning every cup into a canvas for beautiful designs.</p>
-      
-      <h3>The Foundation: Perfect Milk Texture</h3>
-      <p>Great latte art starts with properly steamed milk. The goal is to create microfoam - tiny, velvety bubbles that integrate seamlessly with the milk. Use cold, fresh milk and a clean steam wand for best results.</p>
-      
-      <p>Start steaming with the wand just below the surface, creating foam for the first few seconds. Then plunge the wand deeper to heat and texture the milk, aiming for a final temperature of 140-150°F.</p>
-      
-      <h3>Essential Techniques</h3>
-      <p>The key to latte art is controlling the flow rate and height of your pour. Start high and slow to penetrate the crema, then bring your pitcher closer to the surface as you increase flow rate.</p>
-      
-      <h3>Basic Patterns to Master</h3>
-      <p><strong>The Heart:</strong> Pour steadily into the center, then quickly draw through with a swift motion to create the heart's point.</p>
-      
-      <p><strong>The Rosetta (Leaf):</strong> Start with a steady pour, then wiggle the pitcher side to side while slowly drawing back to create the leaf pattern.</p>
-      
-      <p><strong>The Tulip:</strong> Create multiple hearts stacked on top of each other, finishing with a line drawn through the center.</p>
-      
-      <h3>Practice Makes Perfect</h3>
-      <p>Latte art requires patience and practice. Start with basic patterns and focus on consistency before attempting complex designs. Remember, even imperfect latte art adds a personal touch that customers appreciate.</p>
-      
-      <p>The most important element is the quality of your espresso and milk. Beautiful art on a poorly made latte won't impress anyone, but a well-crafted drink with simple art will always satisfy.</p>
-    `
-  },
+  title: "拉花大師課：打造迷人咖啡藝術",
+  author: "James Wilson",
+  date: "2024 年 2 月 28 日",
+  readTime: "閱讀時間約 6 分鐘",
+  category: "技法",
+  image: "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  content: `
+    <p>拉花，是將一杯普通的拿鐵轉化為藝術品的過程。這門技藝結合了精準技術與創意表達，使每一杯咖啡都成為專屬的美麗畫布。</p>
+    
+    <h3>基礎功：完美奶泡質地</h3>
+    <p>出色的拉花始於細緻的奶泡。目標是製作「微泡」——細小、絲滑、能與牛奶完美融合的綿密氣泡。使用冰涼、新鮮的牛奶與乾淨的蒸汽棒，能大幅提升穩定性。</p>
+    
+    <p>蒸奶時，先讓蒸汽棒停在奶面下方，前幾秒進行打泡；接著將蒸汽棒深入牛奶中加熱並調整質地，目標溫度為 140–150°F（約 60–65°C）。</p>
+    
+    <h3>關鍵技巧</h3>
+    <p>拉花的核心在於掌控「流速」與「高度」。開局時以高、慢的方式倒入，以穿透咖啡油脂（crema）；之後逐漸降低高度並提高流速，以便在表面作畫。</p>
+    
+    <h3>初學必練三大圖形</h3>
+    <p><strong>心形：</strong> 從中心穩定倒入奶泡，最後快速往下拉出一道線，即可形成心形尖端。</p>
+    
+    <p><strong>玫瑰葉（Rosetta）：</strong> 持續穩定倒入，手腕左右小幅擺動，並慢慢往後退，即能呈現葉片紋理。</p>
+    
+    <p><strong>鬱金香（Tulip）：</strong> 以多個連續的「心形」堆疊，最後用一道直線收尾，完成立體層次感。</p>
+    
+    <h3>熟能生巧</h3>
+    <p>拉花講究耐心與練習。從基礎圖形開始，先追求一致性，再挑戰複雜款式。記住：即使不是完美的拉花，也能為咖啡增添溫度與個性，顧客往往會感受到你的用心。</p>
+    
+    <p>最重要的是：拉花美不美，其實比不上咖啡本身的品質。若底層的濃縮與奶泡不理想，即使花樣漂亮也難以令人滿意；反之，紮實的咖啡與簡單的圖形，一樣能帶來極佳的飲用體驗。</p>
+  `
+}
+,
   5: {
-    title: "Seasonal Coffee Blends: What Makes Them Special",
-    author: "Lisa Thompson",
-    date: "February 20, 2024",
-    readTime: "5 min read",
-    category: "Blends",
-    image: "https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    content: `
-      <p>Seasonal coffee blends offer a unique way to experience the changing flavors throughout the year. These limited-edition creations capture the essence of each season while showcasing the creativity of our master roasters.</p>
-      
-      <h3>The Art of Seasonal Blending</h3>
-      <p>Creating seasonal blends requires careful consideration of flavor profiles that complement the time of year. Spring blends might feature bright, floral notes, while winter blends often emphasize rich, warming spices and chocolate undertones.</p>
-      
-      <p>Our roasters work months in advance, experimenting with different combinations and roast levels to achieve the perfect balance for each season.</p>
-      
-      <h3>Spring: Renewal and Brightness</h3>
-      <p>Spring blends celebrate renewal with light, bright flavors. We often incorporate Central American coffees with their clean acidity and floral notes, sometimes adding a touch of African coffee for complexity.</p>
-      
-      <h3>Summer: Light and Refreshing</h3>
-      <p>Summer calls for coffees that shine when served cold. Our summer blends feature beans that maintain their character when iced, with emphasis on fruit-forward flavors and clean finishes.</p>
-      
-      <h3>Fall: Warm and Comforting</h3>
-      <p>As temperatures drop, our fall blends embrace warming spices and nutty undertones. These blends often feature beans from Indonesia and Brazil, creating rich, full-bodied cups perfect for cozy mornings.</p>
-      
-      <h3>Winter: Rich and Indulgent</h3>
-      <p>Winter blends are our most indulgent, featuring deep chocolate notes and warming spices. These blends are designed to provide comfort during the coldest months, often incorporating our darkest roasted beans.</p>
-      
-      <h3>Limited Availability</h3>
-      <p>The limited nature of seasonal blends makes them special. We produce small batches using the finest beans available during each season, ensuring freshness and exclusivity for our customers.</p>
-    `
-  },
+  title: "季節限定咖啡混豆：為何如此特別？",
+  author: "Lisa Thompson",
+  date: "2024 年 2 月 20 日",
+  readTime: "閱讀時間約 5 分鐘",
+  category: "混豆",
+  image: "https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  content: `
+    <p>季節限定咖啡混豆，是一年四季風味變化最迷人的體現。這些限量版本不僅捕捉每個季節的靈魂，也展現了烘豆師的創意與技藝。</p>
+    
+    <h3>季節調配的藝術</h3>
+    <p>打造季節混豆，是一門精準掌握風味的藝術。春季的配方傾向明亮、花香調；冬季則更重視溫暖濃郁的香料與巧克力風味。</p>
+    
+    <p>烘豆師通常會提前數個月開始研發，不斷嘗試不同的產區組合與烘焙程度，力求為每個季節找到最和諧、最具代表性的風味平衡。</p>
+    
+    <h3>春季：清新與新生</h3>
+    <p>春季混豆象徵新生，風味輕盈、明亮。我們常選用中美洲咖啡，以其清爽酸質與花香調為主體，再加入少許非洲豆提升層次感。</p>
+    
+    <h3>夏季：輕盈與清爽</h3>
+    <p>夏季咖啡講究冰飲也好喝。我們的夏季混豆多選用能在冷萃或冰咖啡中依舊保持鮮明特色的豆子，風味以果香、乾淨尾韻為重點。</p>
+    
+    <h3>秋季：溫暖與療癒</h3>
+    <p>氣溫轉涼時，秋季混豆便以溫暖香料與堅果調為主角。常見選用印尼與巴西豆，呈現醇厚飽滿的口感，尤其適合舒適的早晨時光。</p>
+    
+    <h3>冬季：濃郁與沉靜</h3>
+    <p>冬季混豆通常是最具 indulgence 的風味組合，擁有深層巧克力、暖心香料與更深焙的基調，為寒冬帶來最紮實的慰藉。</p>
+    
+    <h3>限量的珍貴</h3>
+    <p>季節混豆之所以特別，部分原因在於它們的限量特性。我們依照當季可取得的最佳生豆小批量製作，確保新鮮度與獨特性，讓每位咖啡愛好者都能享受這份專屬的風味體驗。</p>
+  `
+},
+
   6: {
     title: "Coffee Cupping: How to Taste Like a Professional",
     author: "Robert Martinez",
@@ -219,7 +219,7 @@ export default function BlogDetail({ postId, onBack }: BlogDetailProps) {
             onClick={onBack}
             className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-300"
           >
-            Back to Blog
+            回到首頁
           </button>
         </div>
       </div>
@@ -228,6 +228,9 @@ export default function BlogDetail({ postId, onBack }: BlogDetailProps) {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Navbar */}
+      <Navbar />
+      
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -236,7 +239,7 @@ export default function BlogDetail({ postId, onBack }: BlogDetailProps) {
             className="flex items-center text-amber-600 hover:text-amber-700 font-medium transition-colors duration-200"
           >
             <ArrowLeft className="h-5 w-5 mr-2" />
-            Back to Blog
+              回到首頁
           </button>
         </div>
       </header>
@@ -308,9 +311,7 @@ export default function BlogDetail({ postId, onBack }: BlogDetailProps) {
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">About {post.author}</h3>
               <p className="text-gray-600 leading-relaxed">
-                {post.author} is a coffee expert and passionate writer who brings years of experience 
-                in the coffee industry to every article. Their expertise helps coffee lovers discover 
-                new techniques and deepen their appreciation for this beloved beverage.
+                {post.author} 是一位咖啡專家和充滿熱情的作家 。
               </p>
             </div>
           </div>

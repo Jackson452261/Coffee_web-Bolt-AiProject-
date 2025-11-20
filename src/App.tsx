@@ -224,7 +224,7 @@ function HomePage() {
                   )}
                 </div>
 
-                {['Home', 'About', 'Menu', 'Blog', 'Contact'].map((item) => (
+                {['首頁', '關於我們', '咖啡菜單', '文章分享', '聯絡我們'].map((item) => (
                   <button
                     key={item}
                     onClick={() => scrollToSection(item.toLowerCase())}
@@ -329,26 +329,27 @@ function HomePage() {
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         </div>
         
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Crafted with
-            <span className="block text-amber-400">Passion</span>
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl mx-auto leading-relaxed">
-            Experience the finest artisan coffee, carefully roasted and brewed to perfection in the heart of the city.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+       <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
+  <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+    匠心製作
+    <span className="block text-amber-400">充滿熱情</span>
+  </h1>
+  <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl mx-auto leading-relaxed">
+    於城市中心，品嚐精心烘焙、手工打造的極致精品咖啡。
+  </p>
+  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
             <button 
               onClick={() => scrollToSection('menu')}
               className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
-              Explore Menu
+              探索菜單
             </button>
             <button 
               onClick={() => scrollToSection('contact')}
               className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300"
             >
-              Visit Us
+             聯絡我們
             </button>
           </div>
         </div>
@@ -359,16 +360,16 @@ function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">開店</h2>
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                Founded in 2015, Artisan Brew began as a passion project between two coffee enthusiasts 
-                who believed that exceptional coffee could bring communities together. We source our beans 
-                directly from sustainable farms around the world, ensuring every cup tells a story of 
-                quality and care.
+                Artisan Brew 創立於 2015 年，最初是兩位咖啡愛好者出於熱愛而創立的項目，
+
+他們相信，優質的咖啡能夠將人們凝聚在一起。我們直接從世界各地的永續農場採購咖啡豆，
+
+確保每一杯咖啡都講述著品質與用心的故事。
               </p>
               <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                Our expert roasters use traditional techniques combined with modern precision to create 
-                unique flavor profiles that celebrate the origin and character of each bean.
+               我們的專業烘焙師運用傳統技藝結合現代精準技術，打造出獨特的風味，充分展現每種咖啡豆的產地與特性。
               </p>
               <div className="grid grid-cols-3 gap-8">
                 <div className="text-center">
@@ -410,37 +411,32 @@ function HomePage() {
       <section id="menu" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Signature Menu</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">我們的 菜單</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Discover our carefully curated selection of artisan coffees, each with its own unique character and story.
+             探索我們精心挑選的精品咖啡，每一款都有其獨特的個性和故事。
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                name: "latte",
-                description: "Bright and floral with notes of citrus and jasmine",
+                name: "拿鐵",
+                description: "明亮芬芳，帶有柑橘和茉莉的香氣",
                 price: "$18",
                 image: "https://plus.unsplash.com/premium_photo-1674327105280-b86494dfc690?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGF0dGV8ZW58MHx8MHx8fDA%3D"
               },
              
               
+             
               {
-                name: "Guatemala Antigua",
-                description: "Full-bodied with smoky and spicy notes",
-                price: "$17",
-                image: "https://images.pexels.com/photos/1238141/pexels-photo-1238141.jpeg?auto=compress&cs=tinysrgb&w=800"
-              },
-              {
-                name: "Blue Mountain Jamaica",
-                description: "Mild and sweet with exceptional clarity",
+                name: "牙買加藍山",
+                description: "口感柔和甜美，清澈度極佳。",
                 price: "$32",
                 image: "https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
               {
-                name: "House Blend",
-                description: "Our signature blend of three premium origins",
+                name: "招牌混合",
+                description: "我們獨家調配的三種優質原料",
                 price: "$14",
                 image: "https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg?auto=compress&cs=tinysrgb&w=800"
               }

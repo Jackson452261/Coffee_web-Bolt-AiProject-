@@ -19,8 +19,8 @@ interface BlogProps {
 const blogPosts: BlogPost[] = [
   {
     id: 1,
-    title: "The Art of Pour-Over Coffee: A Complete Guide",
-    excerpt: "Discover the secrets behind the perfect pour-over coffee. From water temperature to pouring technique, learn how to brew like a professional barista.",
+    title: "手沖咖啡 指南",
+    excerpt: "揭秘完美手沖咖啡的奧秘。從水溫到沖泡技巧，學習如何像專業咖啡師一樣沖泡咖啡。",
     author: "Sarah Johnson",
     date: "March 15, 2024",
     image: "https://images.pexels.com/photos/4226796/pexels-photo-4226796.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -29,8 +29,8 @@ const blogPosts: BlogPost[] = [
   },
   {
     id: 2,
-    title: "From Bean to Cup: Our Coffee Journey",
-    excerpt: "Follow the incredible journey of our coffee beans from sustainable farms around the world to your morning cup. Learn about our sourcing process.",
+    title: " 我們的咖啡之旅",
+    excerpt: "跟隨我們的腳步，探索咖啡豆從世界各地永續農場 ",
     author: "Michael Chen",
     date: "March 10, 2024",
     image: "https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -40,8 +40,8 @@ const blogPosts: BlogPost[] = [
    
   {
     id: 3,
-    title: "Latte Art Masterclass: Creating Beautiful Designs",
-    excerpt: "Master the art of latte design with our step-by-step guide. Learn the techniques used by professional baristas to create stunning coffee art.",
+    title: "拿鐵拉花圖案",
+    excerpt: "學習專業咖啡師用來創作精美咖啡拉花的技巧。",
     author: "James Wilson",
     date: "February 28, 2024",
     image: "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -50,9 +50,9 @@ const blogPosts: BlogPost[] = [
   },
   {
     id: 4,
-    title: "Seasonal Coffee Blends: What Makes Them Special",
-    excerpt: "Discover why seasonal coffee blends offer unique flavors and how our roasters create limited-edition blends that capture the essence of each season.",
-    author: "Lisa Thompson",
+    title: "季節.",
+    author: "Jack",
+    excerpt: "探索季節限定咖啡拼配為何擁有獨特的風味 。",
     date: "February 20, 2024",
     image: "https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=800",
     category: "Blends",
@@ -66,9 +66,9 @@ export default function Blog({ onPostClick }: BlogProps) {
     <section id="blog" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Coffee Stories & Insights</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">分享文章</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Dive deep into the world of coffee with our expert insights, brewing guides, and stories from the coffee community.
+           透過我們的專家見解、沖泡指南和咖啡社群的故事，深入了解咖啡的世界。
           </p>
         </div>
 

@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
             <span className="text-xl font-bold text-gray-900">Artisan Brew</span>
           </div>
           <div className="hidden md:flex ml-10 space-x-8">
-            {['Home', 'About', 'Menu', 'Blog', 'Contact'].map((item) => (
+            {['首頁', '關於我們', '咖啡菜單', '文章分享', '聯絡我們'].map((item) => (
               <button
                 key={item}
                 onClick={() => handleNav(item.toLowerCase())}
