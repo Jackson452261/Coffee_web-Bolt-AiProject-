@@ -84,8 +84,21 @@ function HomePage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  // Map Chinese navigation items to English section IDs
+  const getSectionId = (item: string): string => {
+    const mapping: { [key: string]: string } = {
+      '首頁': 'home',
+      '關於我們': 'about',
+      '咖啡菜單': 'menu',
+      '文章分享': 'blog',
+      '聯絡我們': 'contact'
+    };
+    return mapping[item] || item.toLowerCase();
+  };
+
+  const scrollToSection = (item: string) => {
+    const sectionId = getSectionId(item);
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
   };
 
@@ -227,7 +240,7 @@ function HomePage() {
                 {['首頁', '關於我們', '咖啡菜單', '文章分享', '聯絡我們'].map((item) => (
                   <button
                     key={item}
-                    onClick={() => scrollToSection(item.toLowerCase())}
+                    onClick={() => scrollToSection(item)}
                     className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${
                       scrolled 
                         ? 'text-gray-700 hover:text-amber-700' 
@@ -472,7 +485,9 @@ function HomePage() {
       </section>
 
       {/* Blog Section */}
-      <Blog onPostClick={handleBlogPostClick} />
+      <section id="blog">
+        <Blog onPostClick={handleBlogPostClick} />
+      </section>
 
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-gray-900 text-white">

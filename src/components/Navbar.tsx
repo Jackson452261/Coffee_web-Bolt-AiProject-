@@ -5,17 +5,30 @@ import { useNavigate } from 'react-router-dom';
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
 
+  // Map Chinese navigation items to English section IDs
+  const getSectionId = (item: string): string => {
+    const mapping: { [key: string]: string } = {
+      '首頁': 'home',
+      '關於我們': 'about',
+      '咖啡菜單': 'menu',
+      '文章分享': 'blog',
+      '聯絡我們': 'contact'
+    };
+    return mapping[item] || item.toLowerCase();
+  };
+
   // For scrolling to sections on the homepage
-  const handleNav = (section: string) => {
+  const handleNav = (item: string) => {
+    const sectionId = getSectionId(item);
     if (window.location.pathname !== '/') {
       navigate('/');
       // Wait for navigation before scrolling
       setTimeout(() => {
-        const el = document.getElementById(section);
+        const el = document.getElementById(sectionId);
         if (el) el.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     } else {
-      const el = document.getElementById(section);
+      const el = document.getElementById(sectionId);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -32,7 +45,7 @@ const Navbar: React.FC = () => {
             {['首頁', '關於我們', '咖啡菜單', '文章分享', '聯絡我們'].map((item) => (
               <button
                 key={item}
-                onClick={() => handleNav(item.toLowerCase())}
+                onClick={() => handleNav(item)}
                 className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-amber-700 transition-colors duration-200"
               >
                 {item}
