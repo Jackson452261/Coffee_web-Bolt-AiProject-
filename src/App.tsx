@@ -16,6 +16,8 @@ import {
 import Blog from './components/Blog';
 import BlogDetail from './components/BlogDetail';
 import ProductDetail from './components/ProductDetail';
+import Review from './components/Review';
+import Footer from './components/Footer';
 
 function BlogDetailWrapper() {
   const { id } = useParams();
@@ -74,11 +76,21 @@ function HomePage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
+  const [footerVisible, setFooterVisible] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      
+      const footer = document.getElementById('footer');
+      if (footer) {
+        const footerTop = footer.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (footerTop < windowHeight * 0.8) {
+          setFooterVisible(true);
+        }
+      }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -344,8 +356,8 @@ function HomePage() {
         
        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
   <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-    匠心製作
-    <span className="block text-amber-400">充滿熱情</span>
+    咖啡拿鐵
+    <span className="block text-amber-400"> </span>
   </h1>
   <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl mx-auto leading-relaxed">
     於城市中心，品嚐精心烘焙、手工打造的極致精品咖啡。
@@ -433,47 +445,92 @@ function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
+                id: 1,
                 name: "拿鐵",
                 description: "明亮芬芳，帶有柑橘和茉莉的香氣",
                 price: "$18",
                 image: "https://plus.unsplash.com/premium_photo-1674327105280-b86494dfc690?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGF0dGV8ZW58MHx8MHx8fDA%3D"
               },
-             
-              
+              {
+                id: 2,
+                name: "卡布奇諾",
+                description: "濃郁的義式濃縮咖啡配上綿密奶泡",
+                price: "$16",
+                image: "https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=800"
+              },
              
               {
+                id: 4,
+                name: "摩卡咖啡",
+                description: "巧克力與濃縮咖啡的完美結合",
+                price: "$19",
+                image: "https://images.pexels.com/photos/1638280/pexels-photo-1638280.jpeg?auto=compress&cs=tinysrgb&w=800"
+              },
+             
+              {
+                id: 6,
+                name: "冰釀咖啡",
+                description: "冷萃12小時，口感順滑清爽",
+                price: "$15",
+                image: "https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg?auto=compress&cs=tinysrgb&w=800"
+              },
+              {
+                id: 7,
                 name: "牙買加藍山",
                 description: "口感柔和甜美，清澈度極佳。",
                 price: "$32",
                 image: "https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
               {
+                id: 8,
                 name: "招牌混合",
                 description: "我們獨家調配的三種優質原料",
                 price: "$14",
                 image: "https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg?auto=compress&cs=tinysrgb&w=800"
+              },
+              {
+                id: 9,
+                name: "濃縮咖啡",
+                description: "經典義式濃縮，濃郁香醇",
+                price: "$10",
+                image: "https://images.pexels.com/photos/851555/pexels-photo-851555.jpeg?auto=compress&cs=tinysrgb&w=800"
+              },
+             
+              {
+                id: 11,
+                name: "抹茶拿鐵",
+                description: "日式抹茶與牛奶的完美融合",
+                price: "$18",
+                image: "https://images.pexels.com/photos/4226881/pexels-photo-4226881.jpeg?auto=compress&cs=tinysrgb&w=800"
+              },
+              {
+                id: 12,
+                name: "維也納咖啡",
+                description: "頂部覆蓋鮮奶油的經典咖啡",
+                price: "$19",
+                image: "https://images.pexels.com/photos/1120575/pexels-photo-1120575.jpeg?auto=compress&cs=tinysrgb&w=800"
               }
-            ].map((coffee, index) => (
+            ].map((product) => (
               <div 
-                key={index} 
+                key={product.id} 
                 className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
               >
                 <div className="relative overflow-hidden">
                   <img
-                    src={coffee.image}
-                    alt={coffee.name}
+                    src={product.image}
+                    alt={product.name}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full">
-                    <span className="text-amber-700 font-bold">{coffee.price}</span>
+                    <span className="text-amber-700 font-bold">{product.price}</span>
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{coffee.name}</h3>
-                  <p className="text-gray-600 leading-relaxed">{coffee.description}</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{product.name}</h3>
+                  <p className="text-gray-600 leading-relaxed">{product.description}</p>
                   <button
                     className="mt-4 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
-                    onClick={() => navigate(`/product/${index + 1}`)}
+                    onClick={() => navigate(`/product/${product.id}`)}
                   >
                     View Detail
                   </button>
@@ -489,140 +546,14 @@ function HomePage() {
         <Blog onPostClick={handleBlogPostClick} />
       </section>
 
+      {/* Review Section */}
+      <Review />
+
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Visit Our Café</h2>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Experience the warmth of our café and taste the difference that passion makes.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
-              <div className="mb-8">
-                <img
-                  src="https://images.pexels.com/photos/1002740/pexels-photo-1002740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                  alt="Coffee shop interior"
-                  className="rounded-2xl shadow-xl w-full h-80 object-cover"
-                />
-              </div>
-              
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <MapPin className="h-6 w-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="text-lg font-semibold mb-1">Location</h3>
-                    <p className="text-gray-300">123 Coffee Street<br />Downtown District, NY 10001</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <Clock className="h-6 w-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="text-lg font-semibold mb-1">Hours</h3>
-                    <p className="text-gray-300">
-                      Monday - Friday: 6:00 AM - 8:00 PM<br />
-                      Saturday - Sunday: 7:00 AM - 9:00 PM
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <Phone className="h-6 w-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="text-lg font-semibold mb-1">Contact</h3>
-                    <p className="text-gray-300">
-                      Phone: (555) 123-4567<br />
-                      Email: hello@artisanbrew.com
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-    
-            <div className="bg-gray-800 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold mb-6">聯絡我們</h3>
-                {/*   <form 
-                ref={contactFormRef}
-                className="space-y-6"
-                onSubmit={handleContactSubmit}
-              >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    name="from_name"
-                    placeholder="Your Name"
-                    required
-                    className="bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-amber-400 transition-colors"
-                  />
-                  <input
-                    type="text"
-                    name="to_name"
-                    placeholder="Recipient Name"
-                    required
-                    className="bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-amber-400 transition-colors"
-                  />
-                </div>
-                <input
-                  type="email"
-                  name="from_email"
-                  placeholder="Your Email Address"
-                  required
-                  className="bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-amber-400 transition-colors"
-                />
-                <input
-                  type="text"
-                  name="from_phone"
-                  placeholder="Your Phone Number"
-                  className="bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-amber-400 transition-colors"
-                />
-                <textarea
-                  name="message"
-                  placeholder="Your Message"
-                  rows={4}
-                  required
-                  className="bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-amber-400 transition-colors resize-none"
-                ></textarea>
-                <button
-                  type="submit"
-                  className="w-full bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-300"
-                  disabled={contactSending}
-                >
-                  {contactSending ? 'Sending...' : 'Send Message'}
-                </button>
-                {contactResult && (
-                  <div className={`text-center text-sm mt-2 ${contactResult.success ? 'text-green-500' : 'text-red-500'}`}>{contactResult.message}</div>
-                )}
-              </form> 
-               */}
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Footer */}
-      <footer className="bg-black text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center mb-4 md:mb-0">
-              <Coffee className="h-8 w-8 text-amber-400 mr-2" />
-              <span className="text-xl font-bold">Artisan Brew</span>
-            </div>
-            
-            <div className="flex space-x-6">
-              <Instagram className="h-6 w-6 text-gray-400 hover:text-amber-400 cursor-pointer transition-colors" />
-              <Facebook className="h-6 w-6 text-gray-400 hover:text-amber-400 cursor-pointer transition-colors" />
-              <Twitter className="h-6 w-6 text-gray-400 hover:text-amber-400 cursor-pointer transition-colors" />
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Artisan Brew. All rights reserved. Crafted with passion for coffee lovers.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer footerVisible={footerVisible} scrollToSection={scrollToSection} />
     </div>
   );
 }

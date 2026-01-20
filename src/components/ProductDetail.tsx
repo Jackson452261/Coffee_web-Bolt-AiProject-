@@ -8,11 +8,18 @@ interface ProductDetailProps {
 }
 
 const menuItems = [
-  { id: 1, name: "latte", description: "Bright and floral with notes of citrus and jasmine", price: "$18", image: "https://plus.unsplash.com/premium_photo-1674327105280-b86494dfc690?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGF0dGV8ZW58MHx8MHx8fDA%3D" },
-  
-  { id: 2, name: "Guatemala Antigua", description: "Full-bodied with smoky and spicy notes", price: "$17", image: "https://images.pexels.com/photos/1238141/pexels-photo-1238141.jpeg?auto=compress&cs=tinysrgb&w=800" },
-  { id: 3, name: "Blue Mountain Jamaica", description: "Mild and sweet with exceptional clarity", price: "$32", image: "https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=800" },
-  { id: 4, name: "House Blend", description: "Our signature blend of three premium origins", price: "$14", image: "https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg?auto=compress&cs=tinysrgb&w=800" }
+  { id: 1, name: "拿鐵", description: "明亮芬芳，帶有柑橘和茉莉的香氣", price: "$18", image: "https://plus.unsplash.com/premium_photo-1674327105280-b86494dfc690?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGF0dGV8ZW58MHx8MHx8fDA%3D" },
+  { id: 2, name: "卡布奇諾", description: "濃郁的義式濃縮咖啡配上綿密奶泡", price: "$16", image: "https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=800" },
+  { id: 3, name: "美式咖啡", description: "經典濃郁的黑咖啡，口感純淨", price: "$12", image: "https://images.pexels.com/photos/1251175/pexels-photo-1251175.jpeg?auto=compress&cs=tinysrgb&w=800" },
+  { id: 4, name: "摩卡咖啡", description: "巧克力與濃縮咖啡的完美結合", price: "$19", image: "https://images.pexels.com/photos/1638280/pexels-photo-1638280.jpeg?auto=compress&cs=tinysrgb&w=800" },
+  { id: 5, name: "焦糖瑪奇朵", description: "香甜焦糖搭配濃郁咖啡與奶泡", price: "$20", image: "https://images.pexels.com/photos/1251176/pexels-photo-1251176.jpeg?auto=compress&cs=tinysrgb&w=800" },
+  { id: 6, name: "冰釀咖啡", description: "冷萃12小時，口感順滑清爽", price: "$15", image: "https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg?auto=compress&cs=tinysrgb&w=800" },
+  { id: 7, name: "牙買加藍山", description: "口感柔和甜美，清澈度極佳。", price: "$32", image: "https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=800" },
+  { id: 8, name: "招牌混合", description: "我們獨家調配的三種優質原料", price: "$14", image: "https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg?auto=compress&cs=tinysrgb&w=800" },
+  { id: 9, name: "濃縮咖啡", description: "經典義式濃縮，濃郁香醇", price: "$10", image: "https://images.pexels.com/photos/851555/pexels-photo-851555.jpeg?auto=compress&cs=tinysrgb&w=800" },
+  { id: 10, name: "白咖啡", description: "溫和順滑，奶香濃郁", price: "$17", image: "https://images.pexels.com/photos/1446318/pexels-photo-1446318.jpeg?auto=compress&cs=tinysrgb&w=800" },
+  { id: 11, name: "抹茶拿鐵", description: "日式抹茶與牛奶的完美融合", price: "$18", image: "https://images.pexels.com/photos/4226881/pexels-photo-4226881.jpeg?auto=compress&cs=tinysrgb&w=800" },
+  { id: 12, name: "維也納咖啡", description: "頂部覆蓋鮮奶油的經典咖啡", price: "$19", image: "https://images.pexels.com/photos/1120575/pexels-photo-1120575.jpeg?auto=compress&cs=tinysrgb&w=800" }
 ];
 
 const ProductDetail: React.FC<ProductDetailProps> = () => {
