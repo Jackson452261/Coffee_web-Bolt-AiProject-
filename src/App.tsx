@@ -103,7 +103,7 @@ function HomePage() {
       '關於我們': 'about',
       '咖啡菜單': 'menu',
       '文章分享': 'blog',
-      '聯絡我們': 'contact'
+      '聯絡我們': 'footer'
     };
     return mapping[item] || item.toLowerCase();
   };
@@ -433,11 +433,11 @@ function HomePage() {
       </section>
 
       {/* Menu Section */}
-      <section id="menu" className="py-20 bg-white">
+      <section id="menu" className="py-20 bg-gradient-to-b from-gray-100 via-gray-700 to-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">我們的 菜單</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-white-600 max-w-2xl mx-auto">
              探索我們精心挑選的精品咖啡，每一款都有其獨特的個性和故事。
             </p>
           </div>
