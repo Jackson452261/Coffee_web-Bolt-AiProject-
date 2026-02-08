@@ -449,6 +449,7 @@ function HomePage() {
                 name: "拿鐵",
                 description: "明亮芬芳，帶有柑橘和茉莉的香氣",
                 price: "$18",
+                roastLevel: 60,
                 image: "https://plus.unsplash.com/premium_photo-1674327105280-b86494dfc690?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGF0dGV8ZW58MHx8MHx8fDA%3D"
               },
               {
@@ -456,6 +457,7 @@ function HomePage() {
                 name: "卡布奇諾",
                 description: "濃郁的義式濃縮咖啡配上綿密奶泡",
                 price: "$16",
+                roastLevel: 75,
                 image: "https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
              
@@ -464,6 +466,7 @@ function HomePage() {
                 name: "摩卡咖啡",
                 description: "巧克力與濃縮咖啡的完美結合",
                 price: "$19",
+                roastLevel: 70,
                 image: "https://images.pexels.com/photos/1638280/pexels-photo-1638280.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
              
@@ -472,6 +475,7 @@ function HomePage() {
                 name: "冰釀咖啡",
                 description: "冷萃12小時，口感順滑清爽",
                 price: "$15",
+                roastLevel: 50,
                 image: "https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
               {
@@ -479,6 +483,7 @@ function HomePage() {
                 name: "牙買加藍山",
                 description: "口感柔和甜美，清澈度極佳。",
                 price: "$32",
+                roastLevel: 55,
                 image: "https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
               {
@@ -486,6 +491,7 @@ function HomePage() {
                 name: "招牌混合",
                 description: "我們獨家調配的三種優質原料",
                 price: "$14",
+                roastLevel: 65,
                 image: "https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
               {
@@ -493,6 +499,7 @@ function HomePage() {
                 name: "濃縮咖啡",
                 description: "經典義式濃縮，濃郁香醇",
                 price: "$10",
+                roastLevel: 85,
                 image: "https://images.pexels.com/photos/851555/pexels-photo-851555.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
              
@@ -501,6 +508,7 @@ function HomePage() {
                 name: "抹茶拿鐵",
                 description: "日式抹茶與牛奶的完美融合",
                 price: "$18",
+                roastLevel: 40,
                 image: "https://images.pexels.com/photos/4226881/pexels-photo-4226881.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
               {
@@ -508,6 +516,7 @@ function HomePage() {
                 name: "維也納咖啡",
                 description: "頂部覆蓋鮮奶油的經典咖啡",
                 price: "$19",
+                roastLevel: 68,
                 image: "https://images.pexels.com/photos/1120575/pexels-photo-1120575.jpeg?auto=compress&cs=tinysrgb&w=800"
               }
             ].map((product) => (
@@ -527,9 +536,28 @@ function HomePage() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{product.name}</h3>
-                  <p className="text-gray-600 leading-relaxed">{product.description}</p>
+                  <p className="text-gray-600 leading-relaxed mb-4">{product.description}</p>
+                  
+                  {/* Roast Level Progress Bar */}
+                  <div className="mb-4">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm font-medium text-gray-700">烘焙程度</span>
+                      <span className="text-sm font-semibold text-amber-600">{product.roastLevel}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+                      <div 
+                        className="bg-gradient-to-r from-amber-400 to-amber-700 h-2.5 rounded-full transition-all duration-500"
+                        style={{ width: `${product.roastLevel}%` }}
+                      ></div>
+                    </div>
+                    <div className="flex justify-between mt-1">
+                      <span className="text-xs text-gray-500">淺焙</span>
+                      <span className="text-xs text-gray-500">深焙</span>
+                    </div>
+                  </div>
+
                   <button
-                    className="mt-4 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
+                    className="mt-2 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200 w-full"
                     onClick={() => navigate(`/product/${product.id}`)}
                   >
                     View Detail
