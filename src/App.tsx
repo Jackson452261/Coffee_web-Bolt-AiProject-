@@ -37,6 +37,7 @@ function HomePage() {
   const contactFormRef = useRef<HTMLFormElement>(null);
   const [contactSending, setContactSending] = useState(false);
   const [contactResult, setContactResult] = useState<{success: boolean, message: string} | null>(null);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   // Use EmailJS values from environment variables
   const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
@@ -594,6 +595,20 @@ function HomePage() {
               data-netlify="true"
               netlify-honeypot="bot-field"
               className="space-y-6"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const form = e.currentTarget;
+                fetch('/', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                  body: new URLSearchParams(new FormData(form) as any).toString()
+                })
+                .then(() => {
+                  setShowSuccessModal(true);
+                  form.reset();
+                })
+                .catch(() => alert('提交失敗，請稍後再試'));
+              }}
             >
               {/* Hidden input for Netlify */}
               <input type="hidden" name="form-name" value="contact" />
@@ -686,6 +701,31 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 transform transition-all">
+            <div className="text-center">
+              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+                <svg className="h-10 w-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">感謝您的訊息！</h3>
+              <p className="text-gray-600 mb-6">
+                謝謝您提交訊息，我們將盡快回復您
+              </p>
+              <button
+                onClick={() => setShowSuccessModal(false)}
+                className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200"
+              >
+                關閉
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <Footer footerVisible={footerVisible} scrollToSection={scrollToSection} />
