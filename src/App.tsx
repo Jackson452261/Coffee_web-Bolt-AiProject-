@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from 'react-router-dom';
+import { ClerkProvider } from '@clerk/react'
 import { 
   Coffee, 
   MapPin, 
@@ -18,6 +19,7 @@ import BlogDetail from './components/BlogDetail';
 import ProductDetail from './components/ProductDetail';
 import Review from './components/Review';
 import Footer from './components/Footer';
+import { SignInButton, SignUpButton, UserButton, useAuth } from '@clerk/react';
 
 function BlogDetailWrapper() {
   const { id } = useParams();
@@ -38,6 +40,8 @@ function HomePage() {
   const [contactSending, setContactSending] = useState(false);
   const [contactResult, setContactResult] = useState<{success: boolean, message: string} | null>(null);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showAuthDropdown, setShowAuthDropdown] = useState(false);
+  const { isSignedIn } = useAuth();
 
   // Use EmailJS values from environment variables
   const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
@@ -263,6 +267,46 @@ function HomePage() {
                     {item}
                   </button>
                 ))}
+
+                {/* Clerk Auth */}
+                <div className="relative flex items-center">
+                  {isSignedIn ? (
+                    <UserButton afterSignOutUrl="/" />
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => setShowAuthDropdown(!showAuthDropdown)}
+                        className="px-4 py-2 text-sm font-medium text-white bg-amber-600 rounded-lg hover:bg-amber-700 transition-colors duration-200 flex items-center gap-1"
+                      >
+                        登入
+                        <svg className={`w-4 h-4 transition-transform duration-200 ${showAuthDropdown ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      {showAuthDropdown && (
+                        <div className="absolute right-0 top-12 w-40 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden z-50">
+                          <SignInButton mode="modal">
+                            <button
+                              onClick={() => setShowAuthDropdown(false)}
+                              className="w-full px-4 py-3 text-sm font-medium text-gray-700 hover:bg-amber-50 hover:text-amber-700 transition-colors duration-200 text-left"
+                            >
+                              登入
+                            </button>
+                          </SignInButton>
+                          <div className="border-t border-gray-100" />
+                          <SignUpButton mode="modal">
+                            <button
+                              onClick={() => setShowAuthDropdown(false)}
+                              className="w-full px-4 py-3 text-sm font-medium text-gray-700 hover:bg-amber-50 hover:text-amber-700 transition-colors duration-200 text-left"
+                            >
+                              註冊
+                            </button>
+                          </SignUpButton>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -330,7 +374,7 @@ function HomePage() {
                 )}
               </div>
 
-              {['Home', 'About', 'Menu', 'Blog', 'Contact'].map((item) => (
+              {['首頁', '關於', '菜單', '部落格', '聯絡我'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -339,6 +383,29 @@ function HomePage() {
                   {item}
                 </button>
               ))}
+
+              {/* Mobile Clerk Auth */}
+              <div className="border-t border-gray-100 pt-3 mt-2 px-3">
+                {isSignedIn ? (
+                  <div className="flex items-center gap-3 py-2">
+                    <UserButton afterSignOutUrl="/" />
+                    <span className="text-sm text-gray-600">我的帳號</span>
+                  </div>
+                ) : (
+                  <div className="flex gap-3">
+                    <SignInButton mode="modal">
+                      <button className="flex-1 px-4 py-2 text-sm font-medium text-amber-700 border border-amber-700 rounded-lg hover:bg-amber-50 transition-colors duration-200">
+                        登入
+                      </button>
+                    </SignInButton>
+                    <SignUpButton mode="modal">
+                      <button className="flex-1 px-4 py-2 text-sm font-medium text-white bg-amber-600 rounded-lg hover:bg-amber-700 transition-colors duration-200">
+                        註冊
+                      </button>
+                    </SignUpButton>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}
