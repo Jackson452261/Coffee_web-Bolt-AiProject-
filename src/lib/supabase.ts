@@ -1,0 +1,17 @@
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+
+export type Order = {
+  id: string
+  user_id: string
+  product_id: number
+  product_name: string
+  product_price: string
+  product_image: string
+  product_description: string
+  created_at: string
+}

@@ -19,7 +19,9 @@ import BlogDetail from './components/BlogDetail';
 import ProductDetail from './components/ProductDetail';
 import Review from './components/Review';
 import Footer from './components/Footer';
+import OrderHistory from './components/OrderHistory';
 import { SignInButton, SignUpButton, UserButton, useAuth } from '@clerk/react';
+import { supabase } from './lib/supabase';
 
 function BlogDetailWrapper() {
   const { id } = useParams();
@@ -41,7 +43,30 @@ function HomePage() {
   const [contactResult, setContactResult] = useState<{success: boolean, message: string} | null>(null);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showAuthDropdown, setShowAuthDropdown] = useState(false);
-  const { isSignedIn } = useAuth();
+  const [orderingId, setOrderingId] = useState<number | null>(null);
+  const [orderToast, setOrderToast] = useState<string | null>(null);
+  const { isSignedIn, userId } = useAuth();
+
+  const addToOrder = async (product: { id: number; name: string; price: string; image: string; description: string }) => {
+    if (!isSignedIn) {
+      alert('請先登入才能加入訂單');
+      return;
+    }
+    setOrderingId(product.id);
+    const { error } = await supabase.from('orders').insert({
+      user_id: userId,
+      product_id: product.id,
+      product_name: product.name,
+      product_price: product.price,
+      product_image: product.image,
+      product_description: product.description,
+    });
+    setOrderingId(null);
+    if (!error) {
+      setOrderToast(`「${product.name}」已加入訂單！`);
+      setTimeout(() => setOrderToast(null), 3000);
+    }
+  };
 
   // Use EmailJS values from environment variables
   const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
@@ -267,6 +292,18 @@ function HomePage() {
                     {item}
                   </button>
                 ))}
+
+                {/* Order History Link - only when signed in */}
+                {isSignedIn && (
+                  <button
+                    onClick={() => navigate('/order-history')}
+                    className={`px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center gap-1 ${
+                      scrolled ? 'text-gray-700 hover:text-amber-700' : 'text-white hover:text-amber-200'
+                    }`}
+                  >
+                    🛒 訂單紀錄
+                  </button>
+                )}
 
                 {/* Clerk Auth */}
                 <div className="relative flex items-center">
@@ -624,12 +661,21 @@ function HomePage() {
                     </div>
                   </div>
 
-                  <button
-                    className="mt-2 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200 w-full"
-                    onClick={() => navigate(`/product/${product.id}`)}
-                  >
-                    View Detail
-                  </button>
+                  <div className="mt-2 flex gap-2">
+                    <button
+                      className="flex-1 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
+                      onClick={() => navigate(`/product/${product.id}`)}
+                    >
+                      詳細資訊
+                    </button>
+                    <button
+                      className="flex-1 border-2 border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200 disabled:opacity-50"
+                      onClick={() => addToOrder(product)}
+                      disabled={orderingId === product.id}
+                    >
+                      {orderingId === product.id ? '加入中...' : '加入訂單'}
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -796,6 +842,15 @@ function HomePage() {
 
       {/* Footer */}
       <Footer footerVisible={footerVisible} scrollToSection={scrollToSection} />
+
+      {/* Order Toast Notification */}
+      {orderToast && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-xl shadow-xl z-50 flex items-center gap-3 animate-bounce-in">
+          <span className="text-green-400">✓</span>
+          {orderToast}
+          <button onClick={() => navigate('/order-history')} className="ml-2 underline text-amber-400 text-sm">查看訂單</button>
+        </div>
+      )}
     </div>
   );
 }
@@ -807,6 +862,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/blog/:id" element={<BlogDetailWrapper />} />
         <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/order-history" element={<OrderHistory />} />
       </Routes>
     </Router>
   );
