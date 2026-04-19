@@ -15,3 +15,14 @@ export type Order = {
   product_description: string
   created_at: string
 }
+
+export type Favourite = {
+  id: string
+  user_id: string
+  product_id: number
+  product_name: string
+  product_price: string
+  product_image: string
+  product_description: string
+  created_at: string
+}

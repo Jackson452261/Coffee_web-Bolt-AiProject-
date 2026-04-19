@@ -20,8 +20,9 @@ import ProductDetail from './components/ProductDetail';
 import Review from './components/Review';
 import Footer from './components/Footer';
 import OrderHistory from './components/OrderHistory';
+import Favourites from './components/Favourites';
 import { SignInButton, SignUpButton, UserButton, useAuth } from '@clerk/react';
-import { supabase } from './lib/supabase';
+import { supabase, Favourite } from './lib/supabase';
 
 function BlogDetailWrapper() {
   const { id } = useParams();
@@ -45,7 +46,43 @@ function HomePage() {
   const [showAuthDropdown, setShowAuthDropdown] = useState(false);
   const [orderingId, setOrderingId] = useState<number | null>(null);
   const [orderToast, setOrderToast] = useState<string | null>(null);
+  const [favourites, setFavourites] = useState<number[]>([]);
+  const [togglingFavId, setTogglingFavId] = useState<number | null>(null);
   const { isSignedIn, userId } = useAuth();
+
+  useEffect(() => {
+    if (isSignedIn && userId) fetchFavourites();
+    else setFavourites([]);
+  }, [isSignedIn, userId]);
+
+  const fetchFavourites = async () => {
+    const { data } = await supabase
+      .from('favourites')
+      .select('product_id')
+      .eq('user_id', userId);
+    if (data) setFavourites(data.map((f: Pick<Favourite, 'product_id'>) => f.product_id));
+  };
+
+  const toggleFavourite = async (product: { id: number; name: string; price: string; image: string; description: string }) => {
+    if (!isSignedIn) { alert('請先登入才能收藏'); return; }
+    setTogglingFavId(product.id);
+    const isFav = favourites.includes(product.id);
+    if (isFav) {
+      await supabase.from('favourites').delete().eq('user_id', userId).eq('product_id', product.id);
+      setFavourites(prev => prev.filter(id => id !== product.id));
+    } else {
+      await supabase.from('favourites').insert({
+        user_id: userId,
+        product_id: product.id,
+        product_name: product.name,
+        product_price: product.price,
+        product_image: product.image,
+        product_description: product.description,
+      });
+      setFavourites(prev => [...prev, product.id]);
+    }
+    setTogglingFavId(null);
+  };
 
   const addToOrder = async (product: { id: number; name: string; price: string; image: string; description: string }) => {
     if (!isSignedIn) {
@@ -62,7 +99,10 @@ function HomePage() {
       product_description: product.description,
     });
     setOrderingId(null);
-    if (!error) {
+    if (error) {
+      console.error('Order insert error:', error);
+      alert(`加入訂單失敗: ${error.message}`);
+    } else {
       setOrderToast(`「${product.name}」已加入訂單！`);
       setTimeout(() => setOrderToast(null), 3000);
     }
@@ -293,16 +333,26 @@ function HomePage() {
                   </button>
                 ))}
 
-                {/* Order History Link - only when signed in */}
+                {/* Order History & Favourites Links - only when signed in */}
                 {isSignedIn && (
-                  <button
-                    onClick={() => navigate('/order-history')}
-                    className={`px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center gap-1 ${
-                      scrolled ? 'text-gray-700 hover:text-amber-700' : 'text-white hover:text-amber-200'
-                    }`}
-                  >
-                    🛒 訂單紀錄
-                  </button>
+                  <>
+                    <button
+                      onClick={() => navigate('/favourites')}
+                      className={`px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center gap-1 ${
+                        scrolled ? 'text-gray-700 hover:text-amber-700' : 'text-white hover:text-amber-200'
+                      }`}
+                    >
+                      ❤️ 我的收藏
+                    </button>
+                    <button
+                      onClick={() => navigate('/order-history')}
+                      className={`px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center gap-1 ${
+                        scrolled ? 'text-gray-700 hover:text-amber-700' : 'text-white hover:text-amber-200'
+                      }`}
+                    >
+                      🛒 訂單紀錄
+                    </button>
+                  </>
                 )}
 
                 {/* Clerk Auth */}
@@ -638,6 +688,19 @@ function HomePage() {
                   <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full">
                     <span className="text-amber-700 font-bold">{product.price}</span>
                   </div>
+                  {/* Heart / Favourite Button */}
+                  <button
+                    onClick={() => toggleFavourite(product)}
+                    disabled={togglingFavId === product.id}
+                    className="absolute top-4 left-4 bg-white p-2 rounded-full shadow-md hover:scale-110 transition-transform duration-200"
+                  >
+                    <svg
+                      className={`h-5 w-5 transition-colors duration-200 ${favourites.includes(product.id) ? 'text-red-500 fill-red-500' : 'text-gray-400 fill-none'}`}
+                      stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  </button>
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{product.name}</h3>
@@ -863,6 +926,7 @@ function App() {
         <Route path="/blog/:id" element={<BlogDetailWrapper />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/order-history" element={<OrderHistory />} />
+        <Route path="/favourites" element={<Favourites />} />
       </Routes>
     </Router>
   );
