@@ -12,7 +12,8 @@ import {
   Instagram,
   Facebook,
   Twitter,
-  Search
+  Search,
+  ShoppingCart
 } from 'lucide-react';
 import Blog from './components/Blog';
 import BlogDetail from './components/BlogDetail';
@@ -21,8 +22,9 @@ import Review from './components/Review';
 import Footer from './components/Footer';
 import OrderHistory from './components/OrderHistory';
 import Favourites from './components/Favourites';
+import Cart from './components/Cart';
 import { SignInButton, SignUpButton, UserButton, useAuth } from '@clerk/react';
-import { supabase, Favourite } from './lib/supabase';
+import { supabase, Favourite, CartItem } from './lib/supabase';
 
 function BlogDetailWrapper() {
   const { id } = useParams();
@@ -48,12 +50,53 @@ function HomePage() {
   const [orderToast, setOrderToast] = useState<string | null>(null);
   const [favourites, setFavourites] = useState<number[]>([]);
   const [togglingFavId, setTogglingFavId] = useState<number | null>(null);
+  const [cartCount, setCartCount] = useState(0);
+  const [addingToCart, setAddingToCart] = useState<number | null>(null);
   const { isSignedIn, userId } = useAuth();
 
   useEffect(() => {
-    if (isSignedIn && userId) fetchFavourites();
-    else setFavourites([]);
+    if (isSignedIn && userId) {
+      fetchFavourites();
+      fetchCartCount();
+    } else {
+      setFavourites([]);
+      setCartCount(0);
+    }
   }, [isSignedIn, userId]);
+
+  const fetchCartCount = async () => {
+    const { data } = await supabase
+      .from('cart_items')
+      .select('quantity')
+      .eq('user_id', userId);
+    if (data) setCartCount(data.reduce((sum: number, i: Pick<CartItem, 'quantity'>) => sum + i.quantity, 0));
+  };
+
+  const addToCart = async (product: { id: number; name: string; price: string; image: string; description: string }) => {
+    if (!isSignedIn) { alert('請先登入才能加入購物車'); return; }
+    setAddingToCart(product.id);
+    const { data: existing } = await supabase
+      .from('cart_items')
+      .select('id, quantity')
+      .eq('user_id', userId)
+      .eq('product_id', product.id)
+      .single();
+    if (existing) {
+      await supabase.from('cart_items').update({ quantity: existing.quantity + 1 }).eq('id', existing.id);
+    } else {
+      await supabase.from('cart_items').insert({
+        user_id: userId,
+        product_id: product.id,
+        product_name: product.name,
+        product_price: product.price,
+        product_image: product.image,
+        product_description: product.description,
+        quantity: 1,
+      });
+    }
+    setAddingToCart(null);
+    fetchCartCount();
+  };
 
   const fetchFavourites = async () => {
     const { data } = await supabase
@@ -356,9 +399,22 @@ function HomePage() {
                 )}
 
                 {/* Clerk Auth */}
-                <div className="relative flex items-center">
+                <div className="relative flex items-center gap-2">
                   {isSignedIn ? (
-                    <UserButton afterSignOutUrl="/" />
+                    <>
+                      <div className="mt-[30px]"><UserButton afterSignOutUrl="/" /></div>
+                      <button
+                        onClick={() => navigate('/cart')}
+                        className="relative p-2 rounded-full hover:bg-white/20 transition-colors duration-200 mt-[30px]"
+                      >
+                        <ShoppingCart className={`h-6 w-6 ${scrolled ? 'text-gray-700' : 'text-white'}`} />
+                        {cartCount > 0 && (
+                          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                            {cartCount > 9 ? '9+' : cartCount}
+                          </span>
+                        )}
+                      </button>
+                    </>
                   ) : (
                     <>
                       <button
@@ -724,19 +780,20 @@ function HomePage() {
                     </div>
                   </div>
 
-                  <div className="mt-2 flex gap-2">
+                  <div className="mt-2 flex flex-col gap-2">
                     <button
-                      className="flex-1 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
+                      className="w-full bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
                       onClick={() => navigate(`/product/${product.id}`)}
                     >
                       詳細資訊
                     </button>
                     <button
-                      className="flex-1 border-2 border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200 disabled:opacity-50"
-                      onClick={() => addToOrder(product)}
-                      disabled={orderingId === product.id}
+                      className="w-full bg-white border-2 border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200 disabled:opacity-50 flex items-center justify-center gap-2"
+                      onClick={() => addToCart(product)}
+                      disabled={addingToCart === product.id}
                     >
-                      {orderingId === product.id ? '加入中...' : '加入訂單'}
+                      <ShoppingCart className="h-4 w-4" />
+                      {addingToCart === product.id ? '加入中...' : '加入購物車'}
                     </button>
                   </div>
                 </div>
@@ -927,6 +984,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/order-history" element={<OrderHistory />} />
         <Route path="/favourites" element={<Favourites />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
   );
