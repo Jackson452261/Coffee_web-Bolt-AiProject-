@@ -13,7 +13,8 @@ import {
   Facebook,
   Twitter,
   Search,
-  ShoppingCart
+  ShoppingCart,
+  MessageSquare
 } from 'lucide-react';
 import Blog from './components/Blog';
 import BlogDetail from './components/BlogDetail';
@@ -23,6 +24,7 @@ import Footer from './components/Footer';
 import OrderHistory from './components/OrderHistory';
 import Favourites from './components/Favourites';
 import Cart from './components/Cart';
+import CommentModal from './components/CommentModal';
 import { SignInButton, SignUpButton, UserButton, useAuth } from '@clerk/react';
 import { supabase, Favourite, CartItem } from './lib/supabase';
 
@@ -52,6 +54,7 @@ function HomePage() {
   const [togglingFavId, setTogglingFavId] = useState<number | null>(null);
   const [cartCount, setCartCount] = useState(0);
   const [addingToCart, setAddingToCart] = useState<number | null>(null);
+  const [commentProduct, setCommentProduct] = useState<{ id: number; name: string; image: string } | null>(null);
   const { isSignedIn, userId } = useAuth();
 
   useEffect(() => {
@@ -795,6 +798,13 @@ function HomePage() {
                       <ShoppingCart className="h-4 w-4" />
                       {addingToCart === product.id ? '加入中...' : '加入購物車'}
                     </button>
+                    <button
+                      className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center gap-2"
+                      onClick={() => setCommentProduct({ id: product.id, name: product.name, image: product.image })}
+                    >
+                      <MessageSquare className="h-4 w-4" />
+                      留下評論
+                    </button>
                   </div>
                 </div>
               </div>
@@ -970,6 +980,14 @@ function HomePage() {
           {orderToast}
           <button onClick={() => navigate('/order-history')} className="ml-2 underline text-amber-400 text-sm">查看訂單</button>
         </div>
+      )}
+
+      {/* Comment Modal */}
+      {commentProduct && (
+        <CommentModal
+          product={commentProduct}
+          onClose={() => setCommentProduct(null)}
+        />
       )}
     </div>
   );

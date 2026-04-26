@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { supabase, Comment } from '../lib/supabase';
+import { Star, MessageSquare } from 'lucide-react';
 
 interface ProductDetailProps {
   id?: string;
@@ -26,6 +28,27 @@ const ProductDetail: React.FC<ProductDetailProps> = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const product = menuItems.find(item => item.id === Number(id));
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [loadingComments, setLoadingComments] = useState(true);
+
+  useEffect(() => {
+    if (!id) return;
+    const fetchComments = async () => {
+      setLoadingComments(true);
+      const { data } = await supabase
+        .from('comments')
+        .select('*')
+        .eq('product_id', Number(id))
+        .order('created_at', { ascending: false });
+      if (data) setComments(data as Comment[]);
+      setLoadingComments(false);
+    };
+    fetchComments();
+  }, [id]);
+
+  const avgRating = comments.length
+    ? (comments.reduce((s, c) => s + c.rating, 0) / comments.length).toFixed(1)
+    : null;
 
   if (!product) {
     return (
@@ -79,6 +102,55 @@ const ProductDetail: React.FC<ProductDetailProps> = () => {
           >
             Back to Menu
           </button>
+        </div>
+
+        {/* Comments Section */}
+        <div className="max-w-xl w-full mt-8">
+          <div className="flex items-center gap-3 mb-4">
+            <MessageSquare className="h-5 w-5 text-amber-600" />
+            <h3 className="text-xl font-bold text-gray-900">顧客評論</h3>
+            {avgRating && (
+              <div className="flex items-center gap-1 ml-auto">
+                <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+                <span className="font-bold text-amber-600">{avgRating}</span>
+                <span className="text-gray-400 text-sm">({comments.length} 則)</span>
+              </div>
+            )}
+          </div>
+
+          {loadingComments && (
+            <div className="flex justify-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-4 border-amber-400 border-t-transparent" />
+            </div>
+          )}
+
+          {!loadingComments && comments.length === 0 && (
+            <div className="text-center py-10 bg-gray-50 rounded-2xl text-gray-400">
+              <MessageSquare className="h-10 w-10 mx-auto mb-2 opacity-30" />
+              <p>尚無評論，趕快成為第一個留言的人！</p>
+            </div>
+          )}
+
+          <div className="space-y-4">
+            {comments.map(c => (
+              <div key={c.id} className="bg-white rounded-2xl shadow-sm p-5">
+                <div className="flex items-start justify-between mb-2">
+                  <div>
+                    <p className="font-semibold text-gray-800">{c.user_name}</p>
+                    <div className="flex items-center gap-0.5 mt-1">
+                      {[1,2,3,4,5].map(s => (
+                        <Star key={s} className={`h-4 w-4 ${s <= c.rating ? 'fill-amber-400 text-amber-400' : 'fill-gray-200 text-gray-200'}`} />
+                      ))}
+                    </div>
+                  </div>
+                  <span className="text-xs text-gray-400">
+                    {new Date(c.created_at).toLocaleDateString('zh-TW')}
+                  </span>
+                </div>
+                <p className="text-gray-700 leading-relaxed">{c.comment_text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <Footer />

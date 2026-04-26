@@ -27,6 +27,17 @@ export type Favourite = {
   created_at: string
 }
 
+export type Comment = {
+  id: string
+  user_id: string
+  user_name: string
+  product_id: number
+  product_name: string
+  rating: number
+  comment_text: string
+  created_at: string
+}
+
 export type CartItem = {
   id: string
   user_id: string
