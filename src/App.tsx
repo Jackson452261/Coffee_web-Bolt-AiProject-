@@ -656,155 +656,171 @@ function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 id: 1,
                 name: "拿鐵",
-                description: "明亮芬芳，帶有柑橘和茉莉的香氣",
+                origin: "義大利 - 奶香風味",
+                description: "明亮芬芳，帶有柑橘和茉莉的香氣，奶香細膩順滑，尾韻悠長。",
                 price: "$18",
-                roastLevel: 60,
+                isNew: true,
+                tags: [{ color: "#f9a8d4", label: "花香" }, { color: "#fde68a", label: "焦糖" }, { color: "#d9f99d", label: "清甜" }],
                 image: "https://plus.unsplash.com/premium_photo-1674327105280-b86494dfc690?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGF0dGV8ZW58MHx8MHx8fDA%3D"
               },
               {
                 id: 2,
                 name: "卡布奇諾",
-                description: "濃郁的義式濃縮咖啡配上綿密奶泡",
+                origin: "義大利 - 傳統工藝",
+                description: "濃郁的義式濃縮咖啡配上綿密奶泡，口感層次豐富，入口即化。",
                 price: "$16",
-                roastLevel: 75,
+                isNew: true,
+                tags: [{ color: "#c4b5fd", label: "奶泡" }, { color: "#6b7280", label: "苦韻" }, { color: "#fbbf24", label: "香醇" }],
                 image: "https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
-             
               {
                 id: 4,
                 name: "摩卡咖啡",
-                description: "巧克力與濃縮咖啡的完美結合",
+                origin: "衣索比亞 - 深焙精選",
+                description: "巧克力與濃縮咖啡的完美結合，甜苦交織，回甘持久。",
                 price: "$19",
-                roastLevel: 70,
+                isNew: false,
+                tags: [{ color: "#92400e", label: "巧克力" }, { color: "#d97706", label: "榛果" }, { color: "#f87171", label: "甜感" }],
                 image: "https://images.pexels.com/photos/1638280/pexels-photo-1638280.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
-             
               {
                 id: 6,
                 name: "冰釀咖啡",
-                description: "冷萃12小時，口感順滑清爽",
+                origin: "哥倫比亞 - 冷萃工藝",
+                description: "冷萃12小時，口感順滑清爽，果酸柔和地展開，清澈如泉。",
                 price: "$15",
-                roastLevel: 50,
+                isNew: false,
+                tags: [{ color: "#67e8f9", label: "清爽" }, { color: "#86efac", label: "果香" }, { color: "#a5b4fc", label: "順滑" }],
                 image: "https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
               {
                 id: 7,
                 name: "牙買加藍山",
-                description: "口感柔和甜美，清澈度極佳。",
+                origin: "牙買加 - 精品單品",
+                description: "口感柔和甜美，清澈度極佳，被譽為咖啡之王，香氣迷人。",
                 price: "$32",
-                roastLevel: 55,
+                isNew: false,
+                tags: [{ color: "#bfdbfe", label: "花香" }, { color: "#fde68a", label: "甜美" }, { color: "#e0e7ff", label: "清澈" }],
                 image: "https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
               {
                 id: 8,
                 name: "招牌混合",
-                description: "我們獨家調配的三種優質原料",
+                origin: "多產區 - 獨家配方",
+                description: "我們獨家調配的三種優質原料，平衡感絕佳，濃郁而不膩口。",
                 price: "$14",
-                roastLevel: 65,
+                isNew: false,
+                tags: [{ color: "#fca5a5", label: "複雜" }, { color: "#86efac", label: "平衡" }, { color: "#fbbf24", label: "濃郁" }],
                 image: "https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
               {
                 id: 9,
                 name: "濃縮咖啡",
-                description: "經典義式濃縮，濃郁香醇",
+                origin: "義大利 - 深焙極品",
+                description: "經典義式濃縮，濃郁香醇，焦糖甜感與苦韻完美交融。",
                 price: "$10",
-                roastLevel: 85,
+                isNew: false,
+                tags: [{ color: "#92400e", label: "苦韻" }, { color: "#fbbf24", label: "焦糖" }, { color: "#d97706", label: "香醇" }],
                 image: "https://images.pexels.com/photos/851555/pexels-photo-851555.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
-             
               {
                 id: 11,
                 name: "抹茶拿鐵",
-                description: "日式抹茶與牛奶的完美融合",
+                origin: "日本 - 宇治抹茶",
+                description: "日式抹茶與牛奶的完美融合，清甜茶香與綿密奶感層層交疊。",
                 price: "$18",
-                roastLevel: 40,
+                isNew: true,
+                tags: [{ color: "#86efac", label: "抹茶" }, { color: "#d9f99d", label: "清甜" }, { color: "#f9a8d4", label: "奶香" }],
                 image: "https://images.pexels.com/photos/4226881/pexels-photo-4226881.jpeg?auto=compress&cs=tinysrgb&w=800"
               },
               {
                 id: 12,
                 name: "維也納咖啡",
-                description: "頂部覆蓋鮮奶油的經典咖啡",
+                origin: "奧地利 - 宮廷傳統",
+                description: "頂部覆蓋鮮奶油的經典咖啡，溫潤甜香，優雅細膩如維也納樂章。",
                 price: "$19",
-                roastLevel: 68,
+                isNew: false,
+                tags: [{ color: "#f9a8d4", label: "鮮奶油" }, { color: "#fde68a", label: "香甜" }, { color: "#e0e7ff", label: "溫潤" }],
                 image: "https://images.pexels.com/photos/1120575/pexels-photo-1120575.jpeg?auto=compress&cs=tinysrgb&w=800"
               }
             ].map((product) => (
-              <div 
-                key={product.id} 
-                className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+              <div
+                key={product.id}
+                className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden"
               >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full">
-                    <span className="text-amber-700 font-bold">{product.price}</span>
-                  </div>
+                {/* Image Area */}
+                <div className="relative bg-gray-50 h-56 overflow-hidden">
+                  {product.isNew && (
+                    <span className="absolute top-3 left-3 z-10 bg-white text-gray-600 text-xs font-semibold px-3 py-1 rounded-full border border-gray-200">
+                      NEW
+                    </span>
+                  )}
                   {/* Heart / Favourite Button */}
                   <button
                     onClick={() => toggleFavourite(product)}
                     disabled={togglingFavId === product.id}
-                    className="absolute top-4 left-4 bg-white p-2 rounded-full shadow-md hover:scale-110 transition-transform duration-200"
+                    className="absolute top-3 right-3 z-10 bg-white p-1.5 rounded-full shadow hover:scale-110 transition-transform duration-200"
                   >
                     <svg
-                      className={`h-5 w-5 transition-colors duration-200 ${favourites.includes(product.id) ? 'text-red-500 fill-red-500' : 'text-gray-400 fill-none'}`}
+                      className={`h-4 w-4 transition-colors duration-200 ${favourites.includes(product.id) ? 'text-red-500 fill-red-500' : 'text-gray-300 fill-none'}`}
                       stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                   </button>
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{product.name}</h3>
-                  <p className="text-gray-600 leading-relaxed mb-4">{product.description}</p>
-                  
-                  {/* Roast Level Progress Bar */}
-                  <div className="mb-4">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-medium text-gray-700">烘焙程度</span>
-                      <span className="text-sm font-semibold text-amber-600">{product.roastLevel}%</span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
-                      <div 
-                        className="bg-gradient-to-r from-amber-400 to-amber-700 h-2.5 rounded-full transition-all duration-500"
-                        style={{ width: `${product.roastLevel}%` }}
-                      ></div>
-                    </div>
-                    <div className="flex justify-between mt-1">
-                      <span className="text-xs text-gray-500">淺焙</span>
-                      <span className="text-xs text-gray-500">深焙</span>
-                    </div>
+
+                {/* Content */}
+                <div className="flex flex-col flex-1 p-5">
+                  <p className="text-xs text-gray-400 mb-1">{product.origin}</p>
+                  <h3
+                    className="text-lg font-bold text-gray-900 mb-1 cursor-pointer hover:text-amber-700 transition-colors duration-200"
+                    onClick={() => navigate(`/product/${product.id}`)}
+                  >
+                    {product.name}
+                  </h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-3 line-clamp-2">{product.description}</p>
+
+                  {/* Flavor Tags */}
+                  <div className="flex flex-wrap gap-x-3 gap-y-1 mb-4">
+                    {product.tags.map((tag) => (
+                      <span key={tag.label} className="flex items-center gap-1 text-xs text-gray-500">
+                        <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ background: tag.color }} />
+                        {tag.label}
+                      </span>
+                    ))}
                   </div>
 
-                  <div className="mt-2 flex flex-col gap-2">
-                    <button
-                      className="w-full bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
-                      onClick={() => navigate(`/product/${product.id}`)}
-                    >
-                      詳細資訊
-                    </button>
-                    <button
-                      className="w-full bg-white border-2 border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200 disabled:opacity-50 flex items-center justify-center gap-2"
-                      onClick={() => addToCart(product)}
-                      disabled={addingToCart === product.id}
-                    >
-                      <ShoppingCart className="h-4 w-4" />
-                      {addingToCart === product.id ? '加入中...' : '加入購物車'}
-                    </button>
-                    <button
-                      className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center gap-2"
-                      onClick={() => setCommentProduct({ id: product.id, name: product.name, image: product.image })}
-                    >
-                      <MessageSquare className="h-4 w-4" />
-                      留下評論
-                    </button>
+                  {/* Bottom: price + actions */}
+                  <div className="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between">
+                    <span className="text-base font-bold text-gray-900">{product.price}</span>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => setCommentProduct({ id: product.id, name: product.name, image: product.image })}
+                        className="p-2 text-gray-400 hover:text-amber-600 transition-colors duration-200"
+                        title="留下評論"
+                      >
+                        <MessageSquare className="h-4 w-4" />
+                      </button>
+                      <button
+                        onClick={() => addToCart(product)}
+                        disabled={addingToCart === product.id}
+                        className="p-2 text-gray-400 hover:text-amber-600 disabled:opacity-40 transition-colors duration-200"
+                        title="加入購物車"
+                      >
+                        <ShoppingCart className="h-4 w-4" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
